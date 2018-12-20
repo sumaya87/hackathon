@@ -361,7 +361,7 @@
           ],
           labels: [
             'Products',
-            'Services'
+            'Service'
           ]
         },
         options: {
@@ -650,7 +650,7 @@
           ],
           labels: [
             'Products',
-            'Services'
+            'Service'
           ]
         },
         options: {

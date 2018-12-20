@@ -4,7 +4,3 @@
 welcome:
   path: /
   controller: App\Controller\WelcomeController::welcome
-
-leadDetail:
-  path: /details
-  controller: App\Controller\InfoController::details
