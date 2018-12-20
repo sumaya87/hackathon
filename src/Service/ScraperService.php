@@ -25,26 +25,34 @@ class ScraperService
 
     public function getTest()
     {
+        $data = array('first_name' => 'Jonathan', 'last_name' => 'Leane', 'key' => 'drv1n04btkxgkxus2n8ojlm2');
         $configuration = new \PiplApi_SearchRequestConfiguration();
         $configuration->api_key = 'drv1n04btkxgkxus2n8ojlm2';
 
-        $fields = array(new \PiplApi_Address(array("country" => "AU",
-                "state" => "NSW", "city" => "Sydney")),
-            new \PiplApi_Name(array("first" => "Jonathan",
-                "last" => "Leane")));
-        $person = new \PiplApi_Person($fields);
-        $request = new \PiplApi_SearchAPIRequest(array('person' => $person), $configuration);
-
-        return $request;
-//        return $this->apiGet('http://api.pipl.com/search/?first_name=Clark&last_name=Kent&email=clark.kent@example.com&key=drv1n04btkxgkxus2n8ojlm2');
+        $request = new \PiplApi_SearchAPIRequest($data, $configuration);
+        $response = $request->send();
+        var_dump($response->possible_persons);die();
     }
 
     public function getPiplTestData()
     {
-//        $data = array('first_name' => 'Jonathan', 'last_name' => 'Leane', 'key' => 'drv1n04btkxgkxus2n8ojlm2');
-        $response = $this->apiGet('http://api.pipl.com/search/?first_name=Jonathan&last_name=Leane&key=drv1n04btkxgkxus2n8ojlm2');
-        return $response;
+        $data = array('first_name' => 'Jonathan', 'last_name' => 'Leane', 'key' => 'drv1n04btkxgkxus2n8ojlm2');
+        $configuration = new \PiplApi_SearchRequestConfiguration();
+        $configuration->api_key = 'drv1n04btkxgkxus2n8ojlm2';
 
+        $request = new \PiplApi_SearchAPIRequest($data, $configuration);
+        $response = $request->send();
+        var_dump($response->possible_persons);die();
+        return $this->processPiplResponse($response);
+
+    }
+
+    public function processPiplResponse(\PiplApi_SearchAPIResponse $response)
+    {
+        $names = $response->available_data;
+        $addresses = $response->address();
+        var_dump($addresses);
+        die();
     }
 
     public function getLeadInfo(){

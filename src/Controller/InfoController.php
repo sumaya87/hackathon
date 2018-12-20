@@ -27,6 +27,14 @@ class InfoController extends AbstractController
      */
     public function details()
     {
+        return $this->render('detailedInformation.html.twig');
+    }
+    /**
+     * @Route("/raw-details", name="leadRawDetail")
+     * @return Response
+     */
+    public function rawDetails()
+    {
 
         $response = $this->scraper->getPiplTestData();
         die(var_dump($response));
